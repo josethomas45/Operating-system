@@ -1,4 +1,3 @@
-filestat.c
 #include<stdio.h>
 #include<unistd.h>
 #include<sys/types.h>
@@ -13,7 +12,7 @@ printf("Enter Filename:");
 scanf("%s",path1);
 stat(path1,nfile);
 printf("User Id: %d\n",nfile->st_uid);
-printf("Blocksize:%ld\n", nfile->st_blksize);
+printf("Blocksize:%ld\n",nfile->st_blksize);
 printf("Last access time:%ld\n",nfile->st_atime);
 printf("Last modification:%ld\n",nfile->st_mtime);
 printf("Production mode:%d\n",nfile->st_mode);
