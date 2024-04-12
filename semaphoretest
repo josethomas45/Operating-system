@@ -1,11 +1,13 @@
 #include<stdio.h>
+#include<stdlib.h>
 int mutex=1,full=0,empty=3;
 void procedure();
 void consumer();
-void wait();
-void signal();
+int wait(int s);
+int signal(int s);
 void main()
-{
+{ 
+  int choice;
   printf("Enter the choice: \n");
   scanf("%d",&choice);
   switch(choice)
@@ -26,7 +28,7 @@ void main()
    }
    else
    {
-    printf("Buffer is empty\n")
+    printf("Buffer is empty\n");
    }
    case 3:
     exit(0);
@@ -44,5 +46,15 @@ void consumer()
  mutex=wait(mutex);
  full=wait(full);
  empty=signal(empty);
- 
+ mutex=signal(mutex);
+}
+int wait(int s)
+{
+ s--;
+ return s;
+}
+int siganl(int s)
+{
+ s++;
+ return s;
 }
