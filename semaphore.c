@@ -1,42 +1,52 @@
 #include<stdio.h>
 #include<stdlib.h>
 int mutex=1,full=0,empty=3;
-void procedure();
+void producer();
 void consumer();
 int wait(int s);
 int signal(int s);
 void main()
 { 
   int choice;
+  do{
   printf("Enter the choice: \n");
   scanf("%d",&choice);
   switch(choice)
   {
    case 1:
-   if(mutex==1&&empty!=0)
+   if(mutex==1 && empty!=0)
    {
-    procedure();
+    producer();
+    printf("Produced item successfully \n");
    }
    else
    {
+   printf("%d %d", mutex,empty);
     printf("Buffer is full. \n");
    }
+   break;
+   
    case 2:
    if(mutex==1&&full!=0)
    {
     consumer();
+    printf("consumed item successfully \n");
    }
    else
    {
     printf("Buffer is empty\n");
    }
+   break;
+   
    case 3:
     exit(0);
+    break;
   }
+  }while(choice!=3);
 }
 void producer()
 {
- mutex==wait(mutex);
+ mutex=wait(mutex);
  full=signal(full);
  empty=wait(empty);
  mutex=signal(mutex);
@@ -53,7 +63,7 @@ int wait(int s)
  s--;
  return s;
 }
-int siganl(int s)
+int signal(int s)
 {
  s++;
  return s;
